@@ -1,12 +1,15 @@
 FROM python:3.7.0-slim-stretch
+MAINTAINER Gabe Sinkin <gsinkin@earnup.com>
 
 RUN apt-get update && \
-  apt-get install -y \
+  apt-get install -yy \
+  default-libmysqlclient-dev \
+  libpq-dev \
+  python-dev \
   unixodbc \
   unixodbc-dev \
-  default-libmysqlclient-dev \
-  python-dev \
-  wget
+  wget && \
+  rm -rf /var/apt/cache/*
 
 WORKDIR /usr/local/earnup
 
