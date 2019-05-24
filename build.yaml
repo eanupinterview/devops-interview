@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/github.com/eanupinterview/webserver::$COMMIT_SHA', '.' ]
+  args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/github.com/eanupinterview/webserver:$COMMIT_SHA', '.' ]
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/github.com/eanupinterview/webserver:latest', '.' ]
 - name: 'gcr.io/cloud-builders/docker'
