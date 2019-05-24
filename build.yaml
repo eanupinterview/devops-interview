@@ -1,14 +1,14 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/github.com/eanupinterview/webserver:$COMMIT_SHA', '.' ]
+  args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/webserver:$COMMIT_SHA', '.' ]
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/github.com/eanupinterview/webserver:latest', '.' ]
+  args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/webserver:latest', '.' ]
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/github.com/eanupinterview/webserver:$BRANCH_NAME', '.' ]
+  args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/webserver:$BRANCH_NAME', '.' ]
 images:
-- 'gcr.io/virtual-dogfish-241620/github.com/eanupinterview/webserver:latest'
-- 'gcr.io/virtual-dogfish-241620/github.com/eanupinterview/webserver:$COMMIT_SHA'
-- 'gcr.io/virtual-dogfish-241620/github.com/eanupinterview/webserver:$BRANCH_NAME'
+- 'gcr.io/virtual-dogfish-241620/webserver:latest'
+- 'gcr.io/virtual-dogfish-241620/webserver:$COMMIT_SHA'
+- 'gcr.io/virtual-dogfish-241620/webserver:$BRANCH_NAME'
 tags:
 - "cloudbuild"
 
