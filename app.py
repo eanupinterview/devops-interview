@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
 db = SQLAlchemy(app)
 redis_client = redis.Redis(
-    host=os.getenv("REDIS_HOST", "localhost"),
+    host=os.getenv("REDIS_HOST", "10.0.0.3"),
     port=os.getenv("REDIS_PORT", 6379),
     db=0
 )
