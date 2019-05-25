@@ -6,6 +6,7 @@ RUN apt-get update && \
   default-libmysqlclient-dev \
   libpq-dev \
   python-dev \
+  telnet \
   unixodbc \
   unixodbc-dev \
   wget && \
