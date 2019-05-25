@@ -1,4 +1,6 @@
 #!/bin/sh
+export FLASK_ENV=development
+
 if [ -n "$1" ]; then
   echo $1 && python $1
 else
