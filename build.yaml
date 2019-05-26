@@ -9,6 +9,4 @@ images:
 - 'gcr.io/virtual-dogfish-241620/webserver:latest'
 - 'gcr.io/virtual-dogfish-241620/webserver:$COMMIT_SHA'
 - 'gcr.io/virtual-dogfish-241620/webserver:$BRANCH_NAME'
-tags:
-- "cloudbuild"
 
