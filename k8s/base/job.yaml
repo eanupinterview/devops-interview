@@ -1,0 +1,20 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: derpjob
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          nodeSelector:
+            cloud.google.com/gke-nodepool: default-pool
+          containers:
+          - name: derpjob
+            args:
+            - /usr/local/earnup/derp_job.py
+            command:
+            - /usr/local/bin/python
+            image: gcr.io/virtual-dogfish-241620/webserver:latest
