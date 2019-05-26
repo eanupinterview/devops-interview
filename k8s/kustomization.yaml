@@ -1,0 +1,4 @@
+bases:
+- ./dev
+- ./test
+- ./prod

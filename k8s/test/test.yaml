@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: derpserver
+    labels:
+        release: test
+spec:
+    selector:
+        matchLabels:
+            release: test
+    template:
+        metadata:
+            labels:
+                release: test
+        spec:
+            containers:
+              - name: derpserver
+                image: "gcr.io/virtual-dogfish-241620/webserver:test"
+                env:
+                - name: DATABASE_URI
+                  value: "postgresql://test:s3cr3t@10.5.128.3:5432/test"
+                - name: REDIS_HOST
+                  value: "10.0.0.19"
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: derpserver
+    annotations:
+        cloud.google.com/load-balancer-type: "External"
+    labels:
+        release: test
+spec:
+    selector:
+        release: test
+    type: LoadBalancer
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: derpserver
+spec:
+  maxReplicas: 1
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: derpserver
+  targetCPUUtilizationPercentage: 80
+

@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: derpserver
+  labels:
+    app: derpserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: derpserver
+  template:
+    metadata:
+      labels:
+        app: derpserver
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
+      containers:
+        - name: derpserver
+          image: "gcr.io/virtual-dogfish-241620/webserver:latest"
+          imagePullPolicy: Always
+          env:
+          - name: DATABASE_URI
+            value: "postgresql://dev:s3cr3t@10.5.128.3:5432/dev"
+          - name: REDIS_HOST
+            value: "10.0.0.3"
+          - name: REDIS_PORT
+            value: "6379"
+          - name: PORT
+            value: "8080"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 250m
+              memory: 500Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
+

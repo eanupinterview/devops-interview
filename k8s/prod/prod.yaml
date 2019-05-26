@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: derpserver
+    labels:
+        release: prod
+spec:
+    selector:
+        matchLabels:
+            release: prod
+    template:
+        metadata:
+            labels:
+                release: prod
+        spec:
+            containers:
+              - name: derpserver
+                image: "gcr.io/virtual-dogfish-241620/webserver:prod"
+                env:
+                - name: DATABASE_URI
+                  value: "postgresql://prod:s3cr3t@10.5.128.3:5432/prod"
+                - name: REDIS_HOST
+                  value: "10.0.0.27"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: derpserver
+    annotations:
+        cloud.google.com/load-balancer-type: "External"
+    labels:
+        release: prod
+spec:
+    selector:
+        release: prod
+    type: LoadBalancer
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: derpserver
+spec:
+  maxReplicas: 25
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: derpserver
+  targetCPUUtilizationPercentage: 80
+
