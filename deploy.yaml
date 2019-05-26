@@ -4,14 +4,14 @@ steps:
 
 # Deploy to Dev
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['set', 'image', 'deployment', 'dev-derpserver', 'derpserver=us.gcr.io/$PROJECT_ID/webserver:$COMMIT_SHA']
+  args: ['set', 'image', 'deployment', 'dev-derpserver', 'derpserver=gcr.io/$PROJECT_ID/webserver:$COMMIT_SHA']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
 
 # Deploy to Test
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['set', 'image', 'deployment', 'test-derpserver', 'derpserver=us.gcr.io/$PROJECT_ID/webserver:$COMMIT_SHA']
+  args: ['set', 'image', 'deployment', 'test-derpserver', 'derpserver=gcr.io/$PROJECT_ID/webserver:$COMMIT_SHA']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
