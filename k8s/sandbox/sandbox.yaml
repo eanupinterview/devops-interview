@@ -15,7 +15,7 @@ spec:
         spec:
             containers:
               - name: derpserver
-                image: "gcr.io/virtual-dogfish-241620/webserver:sandbox"
+                image: "gcr.io/virtual-dogfish-241620/webserver:latest"
                 env:
                 - name: DATABASE_URI
                   value: "postgresql://sandbox:s3cr3t@10.5.128.3:5432/sandbox"
