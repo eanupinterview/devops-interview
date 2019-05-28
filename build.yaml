@@ -6,7 +6,7 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/webserver:$BRANCH_NAME', '.' ]
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'push', 'gcr.io/virtual-dogfish-241620/webserver:$COMMIT_SHA ]
+  args: [ 'push', 'gcr.io/virtual-dogfish-241620/webserver:$COMMIT_SHA' ]
 
 
 
