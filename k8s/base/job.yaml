@@ -20,7 +20,7 @@ spec:
             image: gcr.io/virtual-dogfish-241620/webserver:latest
             env:
             - name: DATABASE_URI
-              value: "postgresql://dev:s3cr3t@10.5.128.3:5432/dev"
+              value: "postgresql://sandbox:s3cr3t@10.5.128.3:5432/sandbox"
             - name: REDIS_HOST
               value: "10.0.0.3"
             - name: REDIS_PORT
