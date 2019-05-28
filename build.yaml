@@ -14,22 +14,22 @@ steps:
   - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
 # Deploy latest to branch
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-n', '$BRANCH_NAME', './devops-interview/k8s/base/deployment.yaml']
+  args: ['apply', '-n', '$BRANCH_NAME', '-f', './k8s/base/deployment.yaml']
   env:                                                 
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-n', '$BRANCH_NAME', './k8s/base/hpa.yaml']
+  args: ['apply', '-n', '$BRANCH_NAME', '-f', './k8s/base/hpa.yaml']
   env:                                                 
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-n', '$BRANCH_NAME', './k8s/base/job.yaml']
+  args: ['apply', '-n', '$BRANCH_NAME', '-f', './k8s/base/job.yaml']
   env:                                                 
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-n', '$BRANCH_NAME', './k8s/base/service.yaml']
+  args: ['apply', '-n', '$BRANCH_NAME', '-f', './k8s/base/service.yaml']
   env:                                                 
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
