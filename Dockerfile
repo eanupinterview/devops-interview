@@ -1,5 +1,5 @@
 FROM python:3.7.0-slim-stretch
-MAINTAINER Gabe Sinkin <gsinkin@earnup.com>
+MAINTAINER Bilbo <me@me.com>
 
 RUN apt-get update && \
   apt-get install -yy \
