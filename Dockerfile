@@ -28,4 +28,4 @@ ENV DATABASE_URI= \
 
 EXPOSE $PORT
 
-ENTRYPOINT ["sh", "-c", "/usr/local/earnup/entrypoint.sh", "${JOB_NAME}"]
+ENTRYPOINT ["sh", "-c", "/usr/local/earnup/entryplace.sh", "${JOB_NAME}"]
