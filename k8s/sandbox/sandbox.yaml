@@ -1,0 +1,67 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: derpserver
+    labels:
+        release: sandbox
+spec:
+    selector:
+        matchLabels:
+            release: sandbox
+    template:
+        metadata:
+            labels:
+                release: sandbox
+        spec:
+            containers:
+              - name: derpserver
+                image: "gcr.io/virtual-dogfish-241620/webserver:sandbox"
+                env:
+                - name: DATABASE_URI
+                  value: "postgresql://sandbox:s3cr3t@10.5.128.3:5432/sandbox"
+                - name: REDIS_HOST
+                  value: "10.0.0.11"
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: derpserver
+    annotations:
+        cloud.google.com/load-balancer-type: "External"
+    labels:
+        release: sandbox
+spec:
+    selector:
+        release: sandbox
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: derpserver
+spec:
+  maxReplicas: 1
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: derpserver
+  targetCPUUtilizationPercentage: 80
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: derpjob
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: derpjob
+            env:
+            - name: DATABASE_URI
+              value: "postgresql://sandbox:s3cr3t@10.5.128.3:5432/sandbox"
+            - name: REDIS_HOST
+              value: "10.0.0.3"
+
+
