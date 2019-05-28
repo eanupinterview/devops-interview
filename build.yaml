@@ -8,6 +8,11 @@ steps:
 
 # Create branch namespace                        
 - name: 'gcr.io/cloud-builders/kubectl'
+  args: ['create', 'delete', '$BRANCH_NAME']
+  env:                                                 
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
+- name: 'gcr.io/cloud-builders/kubectl'
   args: ['create', 'namespace', '$BRANCH_NAME']
   env:                                                 
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
