@@ -5,6 +5,26 @@ steps:
   args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/webserver:latest', '.' ]
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'gcr.io/virtual-dogfish-241620/webserver:$BRANCH_NAME', '.' ]
+
+# Create branch namespace                        
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['create', 'namespace', '$BRANCH_NAME']
+  env:                                                 
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
+# Deploy latest to branch
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-n', '$BRANCH_NAME', '-k', './k8s/sandbox']
+  env:                                                 
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
+# Set image to the proper SHA
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['set', 'image', '-n', '$BRANCH_NAME', 'deployment', 'derpserver', 'derpserver=gcr.io/$PROJECT_ID/webserver:$COMMIT_SHA']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=earnup'
+
 images:
 - 'gcr.io/virtual-dogfish-241620/webserver:latest'
 - 'gcr.io/virtual-dogfish-241620/webserver:$COMMIT_SHA'
