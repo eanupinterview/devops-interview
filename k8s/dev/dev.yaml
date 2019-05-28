@@ -46,4 +46,22 @@ spec:
     kind: Deployment
     name: derpserver
   targetCPUUtilizationPercentage: 80
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: derpjob
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: derpjob
+            env:
+            - name: DATABASE_URI
+              value: "postgresql://dev:s3cr3t@10.5.128.3:5432/dev"
+            - name: REDIS_HOST
+              value: "10.0.0.11"
+
 

@@ -48,3 +48,33 @@ spec:
     name: derpserver
   targetCPUUtilizationPercentage: 80
 
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: derpserver
+spec:
+  maxReplicas: 2
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: derpserver
+  targetCPUUtilizationPercentage: 80
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: derpjob
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: derpjob
+            env:
+            - name: DATABASE_URI
+              value: "postgresql://test:s3cr3t@10.5.128.3:5432/test"
+            - name: REDIS_HOST
+              value: "10.0.0.19"
+

@@ -18,3 +18,14 @@ spec:
             command:
             - /usr/local/bin/python
             image: gcr.io/virtual-dogfish-241620/webserver:latest
+            env:
+            - name: DATABASE_URI
+              value: "postgresql://dev:s3cr3t@10.5.128.3:5432/dev"
+            - name: REDIS_HOST
+              value: "10.0.0.3"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: PORT
+              value: "8080"
+
+
